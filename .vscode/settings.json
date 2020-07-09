@@ -1,0 +1,7 @@
+{
+  "git.ignoreLimitWarning": true,
+  "prettier.printWidth": 150,
+
+  "spellright.language": ["English (British)"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"]
+}
