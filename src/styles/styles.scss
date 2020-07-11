@@ -3,4 +3,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "layout"
+@import "layout";
+
+@import './input-moment/index'

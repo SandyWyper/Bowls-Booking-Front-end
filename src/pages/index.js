@@ -1,24 +1,40 @@
-import React from "react"
-// import { Link } from "gatsby"
-
+import React, { useEffect, useState } from "react"
 import Layout from "../components/layout"
-// import Image from "../components/image"
 import SEO from "../components/seo"
-import APIHook from "../components/APIHook"
+import { Endpoints } from "../constants/Endpoints"
+import UsersList from "../components/usersList"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <APIHook />
-    {/* <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link> <br />
-    <Link to="/using-typescript/">Go to "Using TypeScript"</Link> */}
-  </Layout>
-)
+const IndexPage = () => {
+  const [userData, setUserData] = useState()
+  const [isLoading, setIsLoading] = useState(false)
 
+  useEffect(() => {
+    setIsLoading(true)
+    fetch(Endpoints.user.getAll.uri, {
+      method: Endpoints.user.getAll.method,
+    })
+      .then(res => res.json())
+      .then(res => {
+        setUserData(res)
+        setIsLoading(false)
+      })
+      .catch(err => {
+        setIsLoading(false)
+        console.log("this is and error: ", err)
+      })
+  }, [])
+
+  return (
+    <Layout>
+      <SEO title="Home" />
+      {isLoading ? (
+        <h4>Please wait, loading.</h4>
+      ) : !userData ? (
+        <h4>No dtata</h4>
+      ) : (
+        <UsersList users={userData} />
+      )}
+    </Layout>
+  )
+}
 export default IndexPage

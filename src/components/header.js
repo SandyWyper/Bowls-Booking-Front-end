@@ -4,7 +4,7 @@ import React from "react"
 
 const Header = ({ siteTitle }) => (
   <header className="bg-yellow-500">
-    <div className="mx-auto container py-3">
+    <div className="container flex items-baseline justify-between py-3 mx-auto">
       <h1 className="m-0">
         <Link
           to="/"
@@ -16,6 +16,9 @@ const Header = ({ siteTitle }) => (
           {siteTitle}
         </Link>
       </h1>
+      <h4 className="m-0">
+        <Link to="/admin">Admin</Link>
+      </h4>
     </div>
   </header>
 )
